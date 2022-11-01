@@ -10,6 +10,3 @@ def executarPedido(funcao,numero):
 
 executarPedido(bash,0)
 executarPedido(bash,1)
-executarPedido(bash,2)
-executarPedido(bash,3)
-executarPedido(bash,4)
