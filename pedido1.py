@@ -6,18 +6,18 @@ import numpy as np
 import pandas as pd
 from playwright.sync_api import sync_playwright
 
-excel = pd.read_excel("C:\megatron\pedidos\pedido1.xlsm", sheet_name=2)
-user = "971" #usuário do representante
-password = "metabatida" #senha do usuário do repre
-colecao = "Pedidos - OUTONO 2023" #nome do campo dentro do WISE da coleçao
-marca = "COCA-COLA - BE RED" #nome do campo dentro do WISE referente à marca para efetuar o pedido
+excel = pd.read_excel("C:\megatron\pedidos\Planilha_de_Pedido_SORAYA_OUT23_-_MARIA_FILÓ.xlsm", sheet_name=0)
+user = "Rodrigo" #usuário do representante
+password = "r0d1" #senha do usuário do repre
+colecao = "Pedidos - Coleção Atual" #nome do campo dentro do WISE da coleçao
+marca = "Pedidos - INVERNO 2023" #nome do campo dentro do WISE referente à marca para efetuar o pedido
 cliente = excel.iloc[2,2] #Atribui o nome do cliente que esta na planilha para a variável cliente.
 
 
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=False)
     page = browser.new_page()
-    page.goto("https://wisesale-cocacola1.azurewebsites.net/WiseSale.aspx")
+    page.goto("http://soma-ws.compuwise.com.br/")
     page.fill("input[name='txtUsuario']", user)
     page.fill("input[name='txtSenha']", password)
     page.click("input[name='btnEntrar']")
@@ -33,7 +33,7 @@ with sync_playwright() as p:
 
 
     linha = 14 #indexação onde começa as referencias do produto
-    while linha <=52: #Mudar para 533 quando for rodar o teste, ou para o tamanho da da planilha de pedidos -2. ex: planilha tem 600 referencias mudar esse campo para 598.
+    while linha <=133: #Mudar para 533 quando for rodar o teste, ou para o tamanho da da planilha de pedidos -2. ex: planilha tem 600 referencias mudar esse campo para 598.
         coluna = 7
         produto = str(excel.iloc[linha,1])
         campoCod = page.locator("input[name='txtCodProd']").get_attribute("title")
